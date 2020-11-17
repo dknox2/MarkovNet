@@ -4,18 +4,12 @@ import time
 
 from markov_chain import MarkovChain
 
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov 17 15:15:41 2020
-
-@author: Dylan
-"""
-
 def markov_test(filename, word_count):
     lines = []
     words = []
     with open(filename) as input_file:
         lines = input_file.readlines()
+        
     for line in lines:
         for word in line.split():
             current_word = word.translate(str.maketrans('', '', string.punctuation))
