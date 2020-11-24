@@ -7,8 +7,12 @@ def parse_yearly_dump(year):
         post_titles = []
         file_number = str(i).zfill(2)
         filename = os.path.join("data", "reddit_dumps", "RS_v2_" + year + "-" + file_number)
-        
-        with open(filename) as file:
+        if not os.path.isfile(filename):
+            filename = os.path.join("data", "reddit_dumps", "RS_" + year + "-" + file_number)
+        if not os.path.isfile(filename):
+            continue
+
+        with open(filename, encoding="utf-8") as file:
             for line in file:
                 data = json.loads(line)
                 subreddit = data["subreddit"]
@@ -29,4 +33,4 @@ if __name__ == "__main__":
     except FileExistsError:
         pass
 
-    parse_yearly_dump("2010")
+    parse_yearly_dump("2019")

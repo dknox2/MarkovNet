@@ -58,7 +58,11 @@ def create_reddit_markov_chain(markov_chain_filename):
     markov_chain = MarkovChain()
 
     directory = os.path.join("data", "askreddit_posts")
+    i = 0
     for filename in os.listdir(directory):
+        if i > 0:
+            break
+        i += 1
         if filename.endswith(".txt"):
             print("adding", filename)
             add_file_to_markov(markov_chain, os.path.join(directory, filename))
@@ -70,12 +74,12 @@ def create_reddit_markov_chain(markov_chain_filename):
 def create_simple_markov_chain(text_filename, markov_chain_filename):
     markov_chain = MarkovChain()
 
-    add_file_to_markov(markov_chain, "drseuss.txt")
+    add_file_to_markov(markov_chain, text_filename)
     dump = json.dumps(markov_chain.__dict__)
     with open(markov_chain_filename, "w", encoding="utf-8") as file:
        file.write(dump)
 
-    print(markov_chain.step("the", 0.14))
+    #print(markov_chain.step("the", 0.14))
 
 def create_super_test_chain(markov_chain_filename):
     markov_chain = MarkovChain()
@@ -90,3 +94,4 @@ def create_super_test_chain(markov_chain_filename):
 
 if __name__ == "__main__":
     create_simple_markov_chain("drseuss.txt", "markov_chain.json")
+    #create_reddit_markov_chain("markov_chain.json")
