@@ -1,5 +1,6 @@
 *.txt
 data/*
 *.pyc
+*.pptx
 
 credentials.json
